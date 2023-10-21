@@ -56,21 +56,27 @@ Crear proyecto vite en ./web
 
 Instalar `react-router-dom` y crear tres rutas en la web:
 
-- /patata -> renderiza <PatataPage/>
-- /signup -> renderiza <SignUpPage/>
-- /login -> renderiza <LoginPage/>
+- /patata -> renderiza PatataPage
+- /signup -> renderiza SignUpPage
+- /login -> renderiza LoginPage
 
 ## Iteración 3
 
-Registro. El componente <SignUpPage> debe renderizar un formulario de registro. Al enviarlo debe crearse un usuario en el API
+Registro. El componente SignUpPage debe renderizar un formulario de registro. Al enviarlo debe crearse un usuario en el API
 
 ## Iteración 4
 
-Login. El componente <SignUpPage> debe renderizar un formulario de login. Al enviarlo debe logarse y recibir la cookie de sesión
+Login. El componente SignUpPage debe renderizar un formulario de login. Al enviarlo debe logarse y recibir la cookie de sesión
 
 ## Iteración 5
 
-Patata. El componente <PatataPage/> debe mostrar la respuesta del API en GET /patata
+Patata. El componente PatataPage debe mostrar la respuesta del API en GET /patata
+
+### Notas
+
+Añadir `useCredentials: true` en axios para que se envien las cookies inter-dominio.
+
+Añadir la configuración de CORS con `credentials: true` para soportar cookies en cors
 
 # Diagramas
 
