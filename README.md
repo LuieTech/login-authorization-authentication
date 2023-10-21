@@ -1,3 +1,5 @@
+# Actividad API
+
 Crear un simple API para poner en práctica lo aprendido sobre autenticación.
 
 ## Iteración 1
@@ -41,6 +43,34 @@ Sólo usuarios autenticados podrán acceder a /patata
 Modificar la ruta GET /patata para que devuelva:
 
 { "patata": "muy buena": "usuario": "EMAIL DEL USUARIO AUTENTICADO" }
+
+# Actividad WEB
+
+Crear la experiencia web de login y acceso autenticado
+
+## Iteración 1
+
+Crear proyecto vite en ./web
+
+## Iteración 2
+
+Instalar `react-router-dom` y crear tres rutas en la web:
+
+- /patata -> renderiza <PatataPage/>
+- /signup -> renderiza <SignUpPage/>
+- /login -> renderiza <LoginPage/>
+
+## Iteración 3
+
+Registro. El componente <SignUpPage> debe renderizar un formulario de registro. Al enviarlo debe crearse un usuario en el API
+
+## Iteración 4
+
+Login. El componente <SignUpPage> debe renderizar un formulario de login. Al enviarlo debe logarse y recibir la cookie de sesión
+
+## Iteración 5
+
+Patata. El componente <PatataPage/> debe mostrar la respuesta del API en GET /patata
 
 # Diagramas
 
