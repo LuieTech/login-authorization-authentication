@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { login } from '../../services/users-service'
 import { useNavigate } from "react-router-dom"
@@ -29,7 +28,10 @@ function LoginPage() {
         <label htmlFor="password" className="form-label">Password</label>
         <input autoComplete='password' type="password" className="form-control" id="password" {...register("password")}/>
       </div>
-      <button type="submit" className="btn btn-primary">Login</button>
+      <div className='d-flex gap-3'>
+        <button type="submit" className="btn btn-primary rounded-3 ">Login</button>
+        <button type='button' className='border rounded-3 text-muted' onClick={() => navigate("/sign-up")}>Sign up</button>
+      </div>
     </form>
   </div>
 }
