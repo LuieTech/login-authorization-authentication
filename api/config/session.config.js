@@ -2,8 +2,10 @@ const expressSession = require("express-session");
 const MongoStore = require("connect-mongo");
 const mongoose = require("mongoose");
 
+// console.log("This is the session secret", process.env.SESSION_SECRET)
+
 module.exports.session = expressSession({
-  secret: process.env.SESSION_SECRET || "super-secret (change it)",
+  secret: process.env.SESSION_SECRET || "",
   proxy: process.env.SESSION_SECURE === "true",
   resave: false,
   saveUninitialized: false,
