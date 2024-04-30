@@ -2,11 +2,13 @@ require('dotenv').config();
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose")
+const createError = require("http-errors")
 
 require("./config/db.config");
 
 const app = express();
-
+const cors = require("./config/cors.config")
+app.use(cors)
 app.use(express.json());
 app.use(logger("dev"));
 
@@ -14,7 +16,7 @@ const sessionConfig = require("./config/session.config");
 app.use(sessionConfig.session);
 
 const routes = require("./config/routes.config");
-app.use("/", routes);
+app.use("/v1", routes);
 
 app.use((req, res, next) => next( createError(404, 'route not found')))
 
