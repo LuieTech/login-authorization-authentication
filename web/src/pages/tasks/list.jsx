@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { getTasks } from '../../services/tasks-service';
-import { useNavigate } from "react-router-dom"
+import { useAuthContext } from '../../contexts/auth-context';
 
 function TaskList() {
 
   const [data, setData] = useState([])
   // const [groups, setGroups] = useState([])
-  const navigate = useNavigate()
+  const { user, onLogout } = useAuthContext();
 
   useEffect(() => {
 
@@ -15,7 +15,7 @@ function TaskList() {
         .then((response) => setData(response))
         .catch(err => {
           if(err.response.status === 401){
-            navigate("/login")
+            onLogout(null)
           }
         } )
      
@@ -26,6 +26,8 @@ function TaskList() {
       // }).catch(error => console.log("Error fetching Groups", error))
 
   }, []);
+
+  if(!user) return <Navigate to="/login" />
 
   if (!data) {
 
