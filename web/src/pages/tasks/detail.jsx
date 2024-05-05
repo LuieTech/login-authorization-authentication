@@ -23,4 +23,4 @@ function TaskDetail() {
   return <div>Task {task.title}</div>
 }
 
-export default TaskDetail
+export default TaskDetail;
