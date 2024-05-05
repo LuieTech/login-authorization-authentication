@@ -1,21 +1,28 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
 import { login } from '../../services/users-service'
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
+import { useAuthContext } from '../../contexts/auth-context'
+
 
 function LoginPage() {
 
-  const {register, handleSubmit, reset } = useForm()
-  const navigate = useNavigate()
+  const {register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
+  const { onLogin, user } = useAuthContext();
 
   function handleLogin(data){
 
-    login(data).then(() => {
-      navigate("/tasks")
+    login(data).then((res) => {
+      onLogin(res)
+
     })
     reset()
-
   }
+
+  if(user) return <Navigate to={"/"} />
+
+
 
   return <div className='m-5'>
     <h1>Login</h1>
