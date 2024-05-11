@@ -22,5 +22,6 @@ router.patch('/tasks', tasks.update)
 
 router.post("/users", users.create)
 router.post("/login", users.login)
+router.post("/logout", users.logout)
 
 module.exports = router;
