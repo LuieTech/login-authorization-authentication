@@ -1,24 +1,28 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from "react-router-dom"
-import { signup } from '../../services/users-service'
+import { Navigate, useNavigate } from "react-router-dom"
+import { login, registerUser } from '../../services/users-service'
+import { useAuthContext } from '../../contexts/auth-context'
+
 
 function SignUpPage() {
 
-  const {register, handleSubmit, reset } = useForm()
+  const {register, handleSubmit } = useForm()
+  const {onLogin} = useAuthContext();
   const navigate = useNavigate()
 
-function handleSignup(data){
-  signup(data).then(() => {
-    navigate("/login")
 
-  }).catch(err => console.log(err))
-  reset()
+function handleSignup(formData){
+
+  return registerUser(formData)
+    .then(() => login(formData))
+    .then((user) => onLogin(user))
+    .catch((err) => console.log('Error during register or login', err))
+
 }
 
   return (
     <div className='m-5'>
-    <h1>Sign up</h1>
+    <h1>Register</h1>
     <form onSubmit={handleSubmit(handleSignup)}>
       <div className="mb-3">
         <label htmlFor="email" className="form-label">Email address</label>
@@ -29,15 +33,12 @@ function handleSignup(data){
         <input autoComplete='password' type="password" className="form-control" id="password" {...register("password")}/>
       </div>
       <div className='d-flex gap-3'>
-        <button type="submit" className="btn btn-primary rounded-3 ">Sign up</button>
+        <button type="submit" className="btn btn-primary rounded-3 ">Send</button>
         <button type='button' className='border rounded-3 text-muted' onClick={() => navigate("/login")}>Login</button>
       </div>
 
     </form>
   </div>
-
-
-
 
   )
 }
