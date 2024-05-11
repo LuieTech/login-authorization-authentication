@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
 import { login } from '../../services/users-service'
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useAuthContext } from '../../contexts/auth-context'
 
 
@@ -9,7 +9,7 @@ function LoginPage() {
 
   const {register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
-  const { onLogin, user } = useAuthContext();
+  const { onLogin } = useAuthContext();
 
   function handleLogin(data){
 
@@ -19,9 +19,6 @@ function LoginPage() {
     })
     reset()
   }
-
-  if(user) return <Navigate to={"/"} />
-
 
 
   return <div className='m-5'>
@@ -36,8 +33,8 @@ function LoginPage() {
         <input autoComplete='password' type="password" className="form-control" id="password" {...register("password")}/>
       </div>
       <div className='d-flex gap-3'>
-        <button type="submit" className="btn btn-primary rounded-3 ">Login</button>
-        <button type='button' className='border rounded-3 text-muted' onClick={() => navigate("/sign-up")}>Sign up</button>
+        <button type="submit" className="btn btn-primary rounded-3 ">Send</button>
+        <button type='button' className='border rounded-3 text-muted' onClick={() => navigate("/register")}>Register</button>
       </div>
     </form>
   </div>
