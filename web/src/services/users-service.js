@@ -10,6 +10,12 @@ export function login(data){
   return service.post("/login", data).then(response => response.data)
 }
 
-export function signup(data){
+export function registerUser(data){
   return service.post("/users", data)
+}
+
+export function logout(){
+  return service.post("/logout").then((response) => response.data)
+// Rest of the code...
+
 }
