@@ -7,7 +7,7 @@ function TaskList() {
 
   const [data, setData] = useState([])
   // const [groups, setGroups] = useState([])
-  const { user, onLogout } = useAuthContext();
+  const { onLogout } = useAuthContext();
 
   useEffect(() => {
 
@@ -27,7 +27,6 @@ function TaskList() {
 
   }, []);
 
-  if(!user) return <Navigate to="/login" />
 
   if (!data) {
 
