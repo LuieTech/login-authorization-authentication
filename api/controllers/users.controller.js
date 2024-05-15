@@ -1,17 +1,18 @@
 const User = require("../models/user.model")
 
 
-module.exports.create = (req, res, nect) => {
+module.exports.create = (req, res, next) => {
 
   User.create({
 
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    name: req.body.name,
+    avatar: req.file?.path
 
   })
     .then(user => res.status(201).json(user))
-    .catch(error => next(error))
-
+    .catch((err) => next(err))
 }
 
 module.exports.login = (req, res, next) => {
