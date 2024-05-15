@@ -4,6 +4,7 @@ const users = require("../controllers/users.controller")
 const groups = require('../controllers/task-group.controller')
 const tasks = require('../controllers/tasks.controller')
 const auth = require("../middlewares/auth.middleware")
+const upload = require("./multer.config")
 
 //taskGroup routes
 router.get('/task-groups', groups.list)
@@ -20,7 +21,7 @@ router.post('/tasks', tasks.create) // no "/:groupId" when receiving the "groupI
 router.patch('/tasks', tasks.update)
 // router.delete('/tasks/:id', tasks.delete)
 
-router.post("/users", users.create)
+router.post("/users", upload.single('avatar'), users.create)
 router.post("/login", users.login)
 router.post("/logout", users.logout)
 
