@@ -1,4 +1,3 @@
-import React from 'react'
 import {Icon} from '@iconify/react'
 import { useAuthContext } from '../contexts/auth-context'
 import { Link } from 'react-router-dom'
@@ -17,7 +16,12 @@ function NavBar() {
             <span className='small'>{user?.email}</span>            
         </span>
         { user && 
-          <button className='btn btn-sm btn-danger d-flex align-items-center' onClick={() => onLogout()} ><Icon icon="uiw:logout" className='me-1'/>Logout</button>
+          <div className='d-flex'>
+            {user.avatar &&
+              <img src={user.avatar} alt='avatar' className='rounded-circle me-2' style={{width:"30px"}}/>
+            }
+            <button className='btn btn-sm btn-danger d-flex align-items-center' onClick={() => onLogout()} ><Icon icon="uiw:logout" className='me-1'/>Logout</button>
+          </div>
         }
       </div>
     </nav>
