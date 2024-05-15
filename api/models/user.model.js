@@ -5,6 +5,14 @@ const bcrypt = require("bcryptjs")
 
 const schema = new Schema(
   {
+    name: {
+      type: String,
+      required: true
+    },
+    avatar:{
+      type: String
+    }
+    ,
     email: {
       type: String,
       required: true,
@@ -20,6 +28,9 @@ const schema = new Schema(
     toJSON: {
       transform: (doc, ret) => {
         ret.id = doc._id;
+        if(ret.avatar){
+          ret.avatar = `http://localhost:3000/${ret.avatar.replace("public/", "")}`;
+        }
         delete ret._id;
         delete ret.password;
         delete ret.__v;
