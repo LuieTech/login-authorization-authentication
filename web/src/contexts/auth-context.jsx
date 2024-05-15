@@ -19,8 +19,6 @@ export function AuthProvider({children}){
     logout().then(() => {
       localStorage.removeItem("user")
       setUser(null);
-      
-      <Navigate to="/login" />;
     })
     
   }
