@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import { logout } from "../services/users-service";
-import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext()
 
