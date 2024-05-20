@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { getTasks } from '../../services/tasks-service';
-import { useAuthContext } from '../../contexts/auth-context';
 
 function TaskList() {
 
   const [data, setData] = useState([])
   // const [groups, setGroups] = useState([])
-  const { onLogout } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
 
       getTasks()
         .then((response) => setData(response))
-        .catch(err => {
-          if(err.response.status === 401){
-            onLogout(null)
-          }
-        } )
      
       // fetch("http://localhost:3000/v1/task-groups", {credentials: "include"})
       // .then(res => res.json())
@@ -36,31 +30,43 @@ function TaskList() {
 
   return (
     <section className='p-4'>
-      <h1>Task list</h1>
+      <div className='d-flex align-items-center gap-3'>
+        <h1>Task list</h1>
+        <Link className='btn btn-primary btn-sm' to="/new-task">Create Task</Link>
+      </div>
 
-      {/* <select  className='ms-4 mt-2'>
-        {groups.map(group => (
-          <option key={group.id} > {group.name} </option>
-        ))}
-      </select> */}
 
-      <label htmlFor="">
-        <input type="text" />
-      </label>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Group</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Labels</th>
+            <th scope="col">Due to</th>
+            <th scope="col">Completed</th>
+          </tr>
+        </thead>
+        <tbody>
 
-      <section className='row'> 
-        {data.map(task => (
-          <div className='col-3 p-5' key={task.id}>
-            <h3>
-              <Link to={`/tasks/${task.id}`} >
-                {task.title}
-              </Link>
-            </h3>  
-            <h3>{task.group.name}</h3>
-          </div>
-        ))}
-      </section>
+          {data.map((task) => (
+          <tr key={task.id} onClick={() => navigate(`/tasks/${task.id}`) }> 
+            <th>{task.group.name}</th>
+            <td>
+            <Link to={`/tasks/${task.id}`} >{task.title}</Link>
+            </td>
+            <td>{task.description}</td>
+            <td>{task.priority}</td>
+            <td>{task.labels.map(label => label+" " )}</td>
+            <td>{task.dueTo}</td>
+            <td>{task.completed ? "Completed" : "No completed"}</td>
+          </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
+          
   )
 }
 
