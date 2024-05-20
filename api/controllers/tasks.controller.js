@@ -48,17 +48,27 @@ module.exports.create = (req, res, next) => {
       }
     })
     .then((task) => res.status(201).json(task)) //always return the task created for inmediate further moves
-    .catch(error => next(error))
+    .catch(error => {
+      console.log(error)
+      next(error)
+    })
+    
 
 }
 
 module.exports.update = (req, res, next) => {
   //don't use findByIdAndUpdate for updating Users because of the password 
-  Task.findByIdAndUpdate(req.params.id, 
+  Task.findByIdAndUpdate(req.params.id, req.body,
     { runValidators: true, 
       new: true 
     }) //runValidators to execute mongoose validators & new:true to return the updated document
-    .then(task => res.json(task))
+    .then(task => {
+      if(task){
+        res.json(task);
+      } else {
+        next(createError(404, "Cannot edit non-existance Task"))
+      }
+    })
     .catch(error => next(error))
 
 }
